@@ -30,6 +30,7 @@
             </div>
         </div>
     </form>
+    
 </template>
 <script>
 import { required, email, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
