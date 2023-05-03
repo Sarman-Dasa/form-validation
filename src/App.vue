@@ -6,6 +6,7 @@
         <div class="nav-rigth">
           <router-link to="/login" v-if="show">Login</router-link>
           <router-link to="/registration">Registration</router-link>
+          <router-link to="/todo">Todo</router-link>
           <a @click="logout()" v-if="!show">Logout</a>
         </div>
       </div>
