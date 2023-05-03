@@ -1,23 +1,32 @@
-import { createWebHistory,createRouter } from "vue-router"
-import Home from "./components/Home.vue"
-import UserFrom from "./components/UserForm.vue"
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
-const routes = [
+const router = new VueRouter({
+  mode: 'history',
+  scrollBehavior() {
+    return { x: 0, y: 0 }
+  },
+  routes: [
     {
-        name: "Home",
-        path: "/",
-        component: Home
+        name: 'Home',
+        path: '/',
+        component: () => import('@/components/Home.vue')
     },
     {
-        name: "UserForm",
-        path: "/add-user",
-        component: UserFrom
-    }
-];
-
-const router = createRouter({
-    history: createWebHistory(),
-    routes
-});
-
-export default router;
+        name: 'Login',
+        path: '/login',
+        component: () => import('@/components/Login.vue')
+    },
+    {
+        name: 'Registration',
+        path: '/registration',
+        component: () => import('@/components/UserForm.vue')
+    },
+    {
+      path: '*',
+      redirect: 'error-404',
+    },
+  ],
+})
+export default router
