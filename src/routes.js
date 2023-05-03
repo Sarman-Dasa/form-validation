@@ -24,6 +24,11 @@ const router = new VueRouter({
         component: () => import('@/components/UserForm.vue')
     },
     {
+      name: 'TodoList',
+      path: '/todo',
+      component: () => import('@/components/Todo.vue')
+    },
+    {
       path: '*',
       redirect: 'error-404',
     },
