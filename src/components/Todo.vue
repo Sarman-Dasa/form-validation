@@ -47,7 +47,7 @@
                         <td>{{ todo.title }}</td>
                         <td>{{ todo.description }}</td>
                         <td>
-                            <button class="btn text-bg-warning" @click="edit(todo)">Edit</button>
+                            <button class="btn text-bg-warning" @click="edit(todo.id)">Edit</button>
                         </td>
                         <td>  
                             <button class="btn text-bg-danger" @click="deleteTodo(todo.id)">Delete</button>
@@ -95,11 +95,13 @@ export default {
                 method = axios.put;
                 url = `http://localhost:8000/api/todo/update/${this.form.id}`;
             }
-            console.log(this.form.id);
-            let result = await method(url,this.form);// axios.post("http://localhost:8000/api/todo/create", this.form);
+
+            let result = await method(url,this.form);
+             // show alert box 
             this.show = true;
-            console.log(result.data.error);
+
             this.message = result.data.message;
+
             if (result.data.error) {
                 this.error = result.data.error;
                 // Change alert message background color 
@@ -109,6 +111,7 @@ export default {
                 this.clearData();
                 this.isEditble = false;
             }
+            this.fetchAll();
         },
         async fetchAll() {
             let result = await axios.post("http://localhost:8000/api/todo/list");
@@ -133,9 +136,10 @@ export default {
                 .then(res => this.message = res);
             }
         },
-        edit(todo) {
-           this.form = todo;
-           this.isEditble = true;
+        async edit(id) {
+            let result = await axios.get("http://localhost:8000/api/todo/get/"+id);
+            this.form = result.data.data;
+            this.isEditble = true;
         }
     },
     mounted() {
