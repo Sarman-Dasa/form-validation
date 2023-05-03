@@ -23,6 +23,7 @@
             <div class="col-12 form-group text-center">
                 <button class="btn btn-vue btn-lg col-4">Sign Up</button>
             </div>
+            
 
         </div>
     </form>
@@ -65,7 +66,7 @@ export default {
                 localStorage.setItem("users", JSON.stringify(result.data[0]));
                 this.$v.$reset();
                 this.resetData();
-                this.$router.push({ name: 'Home' });
+                this.$router.push("/");
             }
             else {
                 this.show = true;
