@@ -16,11 +16,19 @@
                 <button class="btn col-12 btn-info mt-4" @click="save">Upload</button>
             </div>
         </div>
+
+        <!-- Event Bus Data Print -->
+        <div class="col-12">
+            <h3>Event Bus Data</h3>
+          <label for="" class="d-block">{{ userData.name }}</label>
+          <label for="">{{ userData.email }}</label>
+        </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import { eventBus } from '../../src/event-bus.js';
 export default {
     name: "FileUpload",
     data() {
@@ -32,6 +40,7 @@ export default {
             page: 1,
             count: 12,
             pageSize: 10,
+            userData:[]
         }
     },
     methods: {
@@ -52,7 +61,11 @@ export default {
         handlePageChange() {
             alert("work");
         }
-
+    },
+    mounted() {
+        eventBus.$on('event_bus_emitted',(data) => {
+            this.userData = data;
+        })
     }
 }
 </script>
