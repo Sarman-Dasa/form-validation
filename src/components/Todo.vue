@@ -23,6 +23,30 @@
                 <span v-if="error.description" class="text-danger"> {{ error.description }}</span>
             </div>
 
+            <div class="col-sm-12 ">
+                <label for="" class="col-form-label col-form-label-lg">Priority</label>
+                <input type="radio" v-model="form.priority" id="high"  value="high" name="priority">
+                <label for="high">High</label>
+
+                <input type="radio" v-model="form.priority" id="medium" value="medium" name="priority">
+                <label for="medium">medium</label>
+                
+                <input type="radio" v-model="form.priority" id="low" value="low"  name="priority">
+                <label for="low">Low</label>
+
+                <span v-if="error.priority" class="text-danger"> {{ error.priority }}</span>
+            </div>
+            <div class="col-sm-12 ">
+                <label for="" class="col-form-label col-form-label-lg">Status</label>
+                <input type="radio" v-model="form.status" id="done"  value="done" name="status">
+                <label for="done">Done</label>
+
+                <input type="radio" v-model="form.status" id="undone" value="undone"  name="status">
+                <label for="undone">undone</label>
+
+                <span v-if="error.status" class="text-danger"> {{ error.status }}</span>
+            </div>
+
             <div class="col-sm-12 text-center mt-4">
                 <button @click="save" class="text-bg-info col-6 p-2 btn btn-light">
                     {{ isEditble ? 'update' : 'Save' }}
@@ -48,18 +72,22 @@
             <div class="col-12" v-if="todoList.length > 0">
                 <table class="table table-active table-bordered">
                     <tr class="text-bg-light text-center col-12">
-                        <th class="p-3" colspan="5">Todo List</th>
+                        <th class="p-3" colspan="7">Todo List</th>
                     </tr>
                     <tr class="text-bg-dark text-start">
                         <th>#SrNo</th>
                         <th>Title</th>
                         <th>Description</th>
+                        <th>Priority</th>
+                        <th>Status</th>
                         <th colspan="2" class="text-center">Action</th>
                     </tr>
                     <tr v-for="todo in todoList" :key="todo.id" class="col-12 text-start">
                         <td>{{ todo.id }}</td>
                         <td>{{ todo.title }}</td>
                         <td>{{ todo.description }}</td>
+                        <td>{{ todo.priority }}</td>
+                        <td>{{ todo.status }}</td>
                         <td>
                             <button class="btn text-bg-warning" @click="edit(todo.id)">Edit</button>
                         </td>
@@ -102,11 +130,15 @@ export default {
             form: {
                 title: '',
                 description: '',
-                id: ''
+                id: '',
+                priority:null,
+                status:null
             },
             error: {
                 title: '',
-                description: ''
+                description: '',
+                priority:'',
+                status:''
             },
             perPage: 10,
             search: '',
@@ -131,7 +163,7 @@ export default {
                 method = axios.put;
                 url = `http://localhost:8000/api/todo/update/${this.form.id}`;
             }
-
+            console.log(this.form);
             let result = await method(url, this.form);
             // show alert box 
             this.show = true;
@@ -163,9 +195,13 @@ export default {
         },
         clearData() {
             this.error.title = '',
-                this.error.description = '',
-                this.form.title = '',
-                this.form.description = ''
+            this.error.description = '',
+            this.error.priority ='',
+            this.error.status ='',
+            this.form.status = '',
+            this.form.priority ='',
+            this.form.title = '',
+            this.form.description = ''
         },
         deleteTodo(id) {
             if (confirm("Are you sure to delete this record ?")) {
@@ -205,5 +241,9 @@ export default {
 li:hover
 {
     cursor: pointer;
+}
+input[type='radio'] {
+    margin-left: 20px;
+    font-size: 18px;
 }
 </style>
