@@ -9,24 +9,29 @@ const router = new VueRouter({
   },
   routes: [
     {
-        name: 'Home',
-        path: '/',
-        component: () => import('@/components/Home.vue')
+      name: 'Home',
+      path: '/',
+      component: () => import('@/components/Home.vue')
     },
     {
-        name: 'Login',
-        path: '/login',
-        component: () => import('@/components/Login.vue')
+      name: 'Login',
+      path: '/login',
+      component: () => import('@/components/Login.vue')
     },
     {
-        name: 'Registration',
-        path: '/registration',
-        component: () => import('@/components/UserForm.vue')
+      name: 'Registration',
+      path: '/registration',
+      component: () => import('@/components/UserForm.vue')
     },
     {
       name: 'TodoList',
       path: '/todo',
       component: () => import('@/components/Todo.vue')
+    },
+    {
+      name: 'FileUpload',
+      path: '/file-upload',
+      component: () => import('@/components/FileUpload.vue')
     },
     {
       path: '*',
