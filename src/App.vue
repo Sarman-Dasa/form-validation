@@ -2,13 +2,15 @@
   <div id="app" class="h-100">
     <div class="container-fluid h-100">
       <div class="nav">
-        <router-link to="/">Home</router-link>
-        <div class="nav-rigth">
-          <router-link to="/login" v-if="show">Login</router-link>
+        <div v-if="show">
+          <router-link to="/login">Login</router-link>
           <router-link to="/registration">Registration</router-link>
+        </div>
+        <div v-if="!show">
+          <router-link to="/">Home</router-link>
           <router-link to="/todo">Todo</router-link>
           <router-link to="/file-upload">uplaod Image</router-link>
-          <a @click="logout()" v-if="!show">Logout</a>
+          <a @click="logout()">Logout</a>
         </div>
       </div>
       <div class="row h-100">
@@ -86,4 +88,5 @@ a:hover {
 
 .nav-rigth {
   float: right;
-}</style>
+}
+</style>
