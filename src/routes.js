@@ -34,6 +34,11 @@ const router = new VueRouter({
       component: () => import('@/components/FileUpload.vue')
     },
     {
+      name: 'UserList',
+      path: '/user-list',
+      component: () => import('@/components/UserList.vue')
+    },
+    {
       path: '*',
       redirect: 'error-404',
     },
