@@ -10,6 +10,7 @@
           <router-link to="/">Home</router-link>
           <router-link to="/todo">Todo</router-link>
           <router-link to="/file-upload">uplaod Image</router-link>
+          <router-link to="/user-list">User</router-link>
           <a @click="logout()">Logout</a>
         </div>
       </div>
